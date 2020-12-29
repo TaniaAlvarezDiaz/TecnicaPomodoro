@@ -23,7 +23,9 @@ function solicitarPermisoNotificaciones() {
   // Solicitar permisos al usuario si éste no los ha aceptado
   else if (Notification.permission !== 'granted') {
     Notification.requestPermission(function (permission) {
-      permiteNotificaciones = true;
+      if (Notification.permission === 'granted') {
+        permiteNotificaciones = true;
+      }
     });
   }
 }
