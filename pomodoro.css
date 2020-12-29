@@ -1,0 +1,35 @@
+html {
+    margin: 40px;    
+}
+
+body, input, output {
+    font-size: 14pt;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    margin: 20px 0px;
+}
+
+input[type=text] {
+    padding: 10px;
+}
+
+input[type=button] {
+    background-color: #0175fd;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    padding: 20px;
+}
+
+input[type=button]:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }

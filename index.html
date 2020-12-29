@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+
+    <link rel="stylesheet" href="pomodoro.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="pomodoro.js"></script>
+    <script type="text/javascript" src="contador.js"></script>
+
+    <title>Pomodoro</title>
+  </head>
+  <body>
+
+	  <!-- Tarea -->
+    <form id="form_tarea" name="form_tarea">
+      <label for="tarea">Tarea:</label>
+      <br/>
+      <input type="text" id="tarea" name="tarea" placeholder="Nombre de la tarea que se va a realizar" size= "100" required oninput="habilitarBtnIniciarTarea()"/><br />
+      <label for="duracion_tarea">Duración:</label>
+      <br/>
+      <input type="range" id="duracion_tarea" name="duracion_tarea" min="1" max="25" value="25" required oninput="cambiarTextoDuracion('duracion_tarea_minutos', this.value)"/>
+      <output id="duracion_tarea_minutos" name="duracion_tarea_minutos" for="duracion_tarea">25 minutos</output>
+      <br/>
+      <input type="button" id="iniciar_tarea" name="iniciar_tarea" value="Iniciar tarea" disabled onclick="iniciarTarea()"/>
+    </form>
+
+    <!-- Tarea actual y listado de tareas anteriores -->
+    <div id="div_tarea_actual" name="div_tarea_actual">
+      <b>Tarea actual:</b> <p id="tarea_actual" name="tarea_actual"></p><br/>
+      <b>Tiempo restante:</b> <p id="tarea_tiempo_restante" name="tarea_tiempo_restante"></p><br/>
+      <input type="button" id="configurar_descanso" name="configurar_descanso" value="Empezar descanso" disabled onclick="configurarDescanso()"/>
+      <p><b>Tareas anteriores:</b></p>
+      <ol id="tareas_anteriores" name="tareas_anteriores"></ol>
+    </div>
+
+    <!-- Descanso -->
+    <form id="form_descanso" name="form_descanso">
+      <label for="duracion_descanso">Descanso:</label>
+      <br/>
+      <input type="range" id="duracion_descanso" name="duracion_descanso" min="3" max="5" value="5" required oninput="cambiarTextoDuracion('duracion_descanso_minutos', this.value)"/>
+      <output id="duracion_descanso_minutos" name="duracion_descanso_minutos" for="descanso">5 minutos</output>
+      <br/>
+      <input type="button" id="iniciar_descanso" name="iniciar_descanso" value="Iniciar descanso" onclick="iniciarDescanso()"/>
+    </form>
+
+    <!-- Tiempo de descanso -->
+    <div id="div_descanso" name="div_descanso">
+      <b>Tiempo restante de descanso:</b> <p id="descanso_tiempo_restante" name="descanso_tiempo_restante"></p><br/>
+      <input type="button" id="empezar_trabajo" name="empezar_trabajo" value="Volver al trabajo" disabled onclick="configurarTarea()"/>
+    </div>
+
+  </body>
+</html>
