@@ -73,7 +73,7 @@ function iniciarTarea() {
   obtenerListadoTareasAnteriores();
 
   //Iniciar Worker contador
-  iniciarWorkerContador("tarea_tiempo_restante", "configurar_descanso", duracionTarea);
+  iniciarWorkerContador("tarea_tiempo_restante", "configurar_descanso", "Fin de la tarea", duracionTarea);
 }
 
 /**
@@ -97,7 +97,7 @@ function iniciarDescanso() {
   mostrarComponente("div_descanso");
 
   //Iniciar Worker contador
-  iniciarWorkerContador("descanso_tiempo_restante", "empezar_trabajo", duracionDescanso);
+  iniciarWorkerContador("descanso_tiempo_restante", "empezar_trabajo", "Fin del descanso", duracionDescanso);
 }
 
 /* *******************************************************************************************  */
@@ -240,13 +240,15 @@ function anadirTareaAnterior(texto) {
  * Función para iniciar un Worker contador
  * @param {string} element identificador del elemento donde se desea poner el texto del contador
  * @param {string} btn identificador del botón que se debe habilitar una vez el contador finalice
+ * @param {string} text texto que se muestra en la notificación del sistema
  * @param {int} maxTime tiempo máximo del contador
  */
-function iniciarWorkerContador(element, btn, maxTime) {
+function iniciarWorkerContador(element, btn, text, maxTime) {
   if (typeof Worker !== undefined) {
     counterWorker = new Worker("contador.js");
     nombreContador = element;
     botonFinContador = btn;
+    textoNotificacion = text;
     counterWorker.onmessage = actualizarContador;
     counterWorker.postMessage(maxTime);
   } else {
@@ -264,6 +266,6 @@ function actualizarContador(e) {
   //El worker finaliza cuando envía "00:00", entonces se habilita el botón correspondiente
   if (e.data === "00:00") {
     document.getElementById(botonFinContador).disabled = false;
-    mostrarNotificacion("Se acabó el tiempo.");
+    mostrarNotificacion(textoNotificacion);
   }
 }
